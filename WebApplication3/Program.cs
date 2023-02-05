@@ -51,7 +51,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 
-//app.UseMiddleware<AuthMiddleware>();
+app.UseMiddleware<AuthMiddleware>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

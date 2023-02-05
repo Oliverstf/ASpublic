@@ -14,10 +14,10 @@ namespace WebApplication3.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
-            if (!context.User.Identity.IsAuthenticated)
+            if (!context.User.Identity.IsAuthenticated && ((context.Request.Path.Value != "/Login") && (context.Request.Path.Value != "/Register")))
             {
                 context.Response.StatusCode = 401;
-                context.Response.Headers.Add("Location", "/login");
+                context.Response.Redirect("Login");
                 return;
             }
 
