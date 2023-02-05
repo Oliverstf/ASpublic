@@ -14,12 +14,18 @@ namespace WebApplication3.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
-            if (!context.User.Identity.IsAuthenticated && ((context.Request.Path.Value != "/Login") && (context.Request.Path.Value != "/Register")))
+            if (!context.User.Identity.IsAuthenticated && (context.Request.Path.Value != "/Login") && (context.Request.Path.Value != "/Register") && (context.Request.Path.Value != "/ForgetPassword") && (context.Request.Path.Value != "/ResetPassword") && (context.Request.Path.Value != "/EmailSentConfirmed"))
             {
                 context.Response.StatusCode = 401;
-                context.Response.Redirect("Login");
+                context.Response.Redirect("/Login");
                 return;
             }
+
+            //if (context.User.Identity.IsAuthenticated && ((context.Request.Path.Value == "/Login") && (context.Request.Path.Value == "/Register")))
+            //{
+            //    context.Response.Redirect("/Display");
+            //    return;
+            //}
 
             await _next(context);
         }

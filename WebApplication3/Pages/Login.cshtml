@@ -1,6 +1,7 @@
 ﻿@page
 @model WebApplication3.Pages.LoginModel
 @{
+	Layout = "_Layout";
 }
 @section Scripts
 	{
@@ -14,19 +15,17 @@
 		</script>
 }
 
-<div class="container mt-5">
 
-	<div class="row justify-content-center align-items-center">
-
-		<div class="col-sm-12 col-md-12 col-lg-4 border shadow p-3 mb-5 rounded-3">
-			<h1 class="mb-3 p-2 text-center">Login </h1>
-
-			<form method="post">
-
-				<div asp-validation-summary="All" class="text-danger"></div>
-
-				<div class="mb-3">
-					<label class="form-label" asp-for="LModel.Username">Username</label>
+<h1>Login</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            
+            <div class="mb-3">
+					<label class="form-label" asp-for="LModel.Username">Email</label>
 					<input type="Text" asp-for="LModel.Username" class="form-control" />
 					<span asp-validaton-for="LModel.Email" class="text-danger"></span>
 				</div>
@@ -40,8 +39,9 @@
 
 				<div class="mb-3 text-center">
 					<button type="submit" class="btn btn-success">Login</button>
+				<a asp-page="/ForgetPassword" class="btn btn-default">Forgot Password</a>
 				</div>
-			</form>
-		</div>
-	</div>
+        </form>
+    </div>
 </div>
+

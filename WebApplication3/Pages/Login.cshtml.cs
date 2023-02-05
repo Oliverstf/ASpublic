@@ -53,20 +53,25 @@ namespace WebApplication3.Pages
         }
         public async Task<IActionResult> OnPostAsync()
         {
-			if (ModelState.IsValid)
+			if (ModelState.IsValid && ReCaptchaPassed(Request.Form["foo"]))
             {
                 //PasswordSignInAsync uses Username and password not email and password
                 var identityResult = await signInManager.PasswordSignInAsync(LModel.Username, LModel.Password,
                 false, false);
                 if (identityResult.Succeeded)
                 {
-                    return RedirectToAction("Display");
+					return Redirect("/Display");
 
                 }
                 else
                 {
                     ModelState.AddModelError("", "Incorerct Username or password");
                 }
+            }
+            if (!ReCaptchaPassed(Request.Form["foo"]))
+            {
+                ModelState.AddModelError(string.Empty, "You failed the CAPTCHA.");
+                return Page();
             }
             return Page();
         }

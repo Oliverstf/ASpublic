@@ -26,6 +26,7 @@ namespace WebApplication3.ViewModels
         public string CreditCard { get; set; }
         [Required]
         [DataType(DataType.PhoneNumber)]
+        [RegularExpression("^[0-9]*$")]
         public string PhoneNumber { get; set; }
         [Required]
         public string Address { get; set; }
@@ -36,7 +37,11 @@ namespace WebApplication3.ViewModels
         [Required]
         public string AboutMe { get; set; }
         [Required]
+        [RegularExpression("^[a-zA-Z ]*$")]
         public string Gender { get; set; }
+        [Required]
+        [RegularExpression("^[a-zA-Z ]*$")]
+        public string Full_Name { get; set; }
 
 
 

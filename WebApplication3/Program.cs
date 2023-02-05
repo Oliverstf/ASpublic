@@ -1,15 +1,25 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.ComponentModel.Design;
 using WebApplication3.Middleware;
 using WebApplication3.Model;
+using WebApplication3.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AuthDbContext>();
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>().AddErrorDescriber<ErrorDesc>();
+//builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>().AddErrorDescriber<ErrorDesc>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(config =>
+{
+	config.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultProvider;
+})
+	.AddDefaultTokenProviders()
+	.AddEntityFrameworkStores<AuthDbContext>()
+    .AddErrorDescriber<ErrorDesc>();
 builder.Services.Configure<IdentityOptions>(options =>
 {
     //Password req
@@ -24,7 +34,9 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.AllowedUserNameCharacters =
             "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
 
-
+    options.Lockout.AllowedForNewUsers = true;
+    options.Lockout.MaxFailedAccessAttempts = 3;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
 });
 builder.Services.AddDataProtection();
 builder.Services.AddHttpClient();
@@ -35,10 +47,19 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(60);
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+
+
+//builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
+//   opt.TokenLifespan = TimeSpan.FromHours(2));
+builder.Services.AddTransient<IUserTwoFactorTokenProvider<ApplicationUser>, DataProtectorTokenProvider<ApplicationUser>>();
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
+			   opt.TokenLifespan = TimeSpan.FromHours(2));
+builder.Services.AddScoped<UserPasswordHistoryService>();
 
 var app = builder.Build();
 
@@ -51,9 +72,10 @@ if (!app.Environment.IsDevelopment())
 }
 
 
-app.UseMiddleware<AuthMiddleware>();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 
@@ -61,6 +83,24 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.MapRazorPages();
+
+app.UseMiddleware<AuthMiddleware>();
+
+
+
+
+app.UseErrorHandlingMiddleware();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+});
+
+app.UseStatusCodePagesWithReExecute("/Error/{0}");
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+});
 
 app.Run();

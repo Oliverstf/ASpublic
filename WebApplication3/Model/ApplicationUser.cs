@@ -12,7 +12,8 @@ namespace WebApplication3.Model
         public string About { get; set; }
         public byte[] ImageFile { get; set; }
         [NotMapped]
-        public string UnenCredit_Card { get; set; }
+        public string? UnenCredit_Card { get; set; }
+        public string Full_Name { get; set; }
 
 
 

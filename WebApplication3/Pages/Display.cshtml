@@ -2,3 +2,57 @@
 @model WebApplication3.Pages.DisplayModel
 @{
 }
+
+
+<h1>Details</h1>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDis.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDis.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDis.Gender)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDis.Gender)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDis.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDis.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDis.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDis.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDis.UnenCredit_Card)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserDis.UnenCredit_Card)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserDis.About)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.Raw(Model.UserDis.About)
+        </dd>
+        <div>
+            <img src="@Model.imgSrc" />
+        </div>
+        <div class="mb-3 text-center">
+            <a asp-page="/Logout"  class="btn btn-default">Logout</a>
+
+        </div>
+    </dl>
+</div>
+<div>

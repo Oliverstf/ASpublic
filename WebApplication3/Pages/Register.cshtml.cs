@@ -6,6 +6,8 @@ using WebApplication3.Model;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using System.Text.Encodings.Web;
+using WebApplication3.Services;
 
 namespace WebApplication3.Pages
 {
@@ -15,6 +17,11 @@ namespace WebApplication3.Pages
         private UserManager<ApplicationUser> userManager { get; }
         private SignInManager<ApplicationUser> signInManager { get; }
         private AuthDbContext authDbContext { get; }
+        private readonly HtmlEncoder htmlEncoder;
+		private readonly UserPasswordHistoryService _userpasswordhistory;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+
 
 
         [BindProperty]
@@ -22,11 +29,17 @@ namespace WebApplication3.Pages
 
         public RegisterModel(UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
-        AuthDbContext authDbContext)
+        AuthDbContext authDbContext,
+        HtmlEncoder htmlEncoder,
+		UserPasswordHistoryService userpasswordhistory,
+        RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.authDbContext = authDbContext;
+            this.htmlEncoder = htmlEncoder;
+            this._userpasswordhistory = userpasswordhistory;
+            _roleManager = roleManager;
         }
 
 
@@ -43,6 +56,16 @@ namespace WebApplication3.Pages
             {
                 ModelState.AddModelError("", "Email is taken");
                 return Page();
+            }
+
+            string[] roleNames = { "Administrator", "User" };
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await _roleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    var roleResult = await _roleManager.CreateAsync(new IdentityRole(roleName));
+                }
             }
 
             if (ModelState.IsValid)
@@ -64,13 +87,17 @@ namespace WebApplication3.Pages
                     Gender = RModel.Gender,
                     PhoneNumber = RModel.PhoneNumber,
                     ImageFile = imageData,
-                    About = RModel.AboutMe,
-                    Address = RModel.Address
+                    About = htmlEncoder.Encode(RModel.AboutMe),
+                    Address = RModel.Address,
+                    Full_Name = RModel.Full_Name
 
                 };
                 var result = await userManager.CreateAsync(user, RModel.Password);
                 if (result.Succeeded)
                 {
+                    
+                    _userpasswordhistory.SavePassword(RModel.Email,RModel.Password,DateTime.Now);
+                    await userManager.AddToRoleAsync(user, "User");
                     await signInManager.SignInAsync(user, false);
                     return RedirectToPage("Index");
                 }
@@ -78,6 +105,7 @@ namespace WebApplication3.Pages
                 {
                     ModelState.AddModelError("", error.Description);
                 }
+                
             }
             return Page();
         }
@@ -105,28 +133,7 @@ namespace WebApplication3.Pages
             return clearText;
         }
 
-        private string Decrypt(string cipherText)
-        {
-            string encryptionKey = "E)H@McQfThWmZq4t7w!z%C*F-JaNdRgU";
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            using (Aes encryptor = Aes.Create())
-            {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(encryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
-                    {
-                        cs.Write(cipherBytes, 0, cipherBytes.Length);
-                        cs.Close();
-                    }
-                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
-                }
-            }
-
-            return cipherText;
-        }
+        
 
 
 

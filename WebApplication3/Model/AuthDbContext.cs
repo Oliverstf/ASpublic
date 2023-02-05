@@ -23,8 +23,13 @@ namespace WebApplication3.Model
             base.OnModelCreating(builder);
 
             builder.Entity<ApplicationUser>().ToTable("AspNetUsers");
+            builder.Entity<AuditLog>().ToTable("AuditLog");
+            builder.Entity<UserPasswordHistory>().ToTable("PasswordHistory");
         }
-    }
+        DbSet<AuditLog> AuditLog { get; set; }
+		public DbSet<UserPasswordHistory> UserPasswordHistory { get; set; }
+	}
+
 
 
 
