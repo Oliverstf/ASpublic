@@ -2,3 +2,46 @@
 @model WebApplication3.Pages.LoginModel
 @{
 }
+@section Scripts
+	{
+	<script src="https://www.google.com/recaptcha/api.js?render=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></script>
+		<script>
+			grecaptcha.ready(function () {
+			grecaptcha.execute('6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', { action: 'login' }).then(function (token) {
+					document.getElementById("foo").value = token;
+				});
+			});
+		</script>
+}
+
+<div class="container mt-5">
+
+	<div class="row justify-content-center align-items-center">
+
+		<div class="col-sm-12 col-md-12 col-lg-4 border shadow p-3 mb-5 rounded-3">
+			<h1 class="mb-3 p-2 text-center">Login </h1>
+
+			<form method="post">
+
+				<div asp-validation-summary="All" class="text-danger"></div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="LModel.Username">Username</label>
+					<input type="Text" asp-for="LModel.Username" class="form-control" />
+					<span asp-validaton-for="LModel.Email" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="LModel.Password">Password</label>
+					<input type="Text" asp-for="LModel.Password" class="form-control" />
+					<span asp-validaton-for="LModel.Password" class="text-danger"></span>
+				</div>
+				<input type="hidden" id="foo" name="foo" />
+
+				<div class="mb-3 text-center">
+					<button type="submit" class="btn btn-success">Login</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

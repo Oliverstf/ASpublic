@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication3.Model
 {
@@ -10,6 +11,10 @@ namespace WebApplication3.Model
         public string Address { get; set; }
         public string About { get; set; }
         public byte[] ImageFile { get; set; }
+        [NotMapped]
+        public string UnenCredit_Card { get; set; }
+
+
 
     }
 }
