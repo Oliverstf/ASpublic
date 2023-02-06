@@ -15,6 +15,7 @@ using System.Net;
 using System.Xml.Linq;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Authorization;
+using WebApplication3.Services;
 
 namespace WebApplication3.Pages
 {
@@ -25,16 +26,19 @@ namespace WebApplication3.Pages
 
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IAuditLogService _auditLogService;
 
 		private readonly IOptions<RecaptchaSettings> _recaptchaSettings;
 		private readonly IHttpClientFactory _httpClientFactory;
 		public LoginModel(SignInManager<ApplicationUser> signInManager,
                           UserManager<ApplicationUser> userManager,
 						  IOptions<RecaptchaSettings> recaptchaSettings,
-			              IHttpClientFactory httpClientFactory)
+			              IHttpClientFactory httpClientFactory, 
+                          IAuditLogService auditLogService)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+            _auditLogService= auditLogService;
         }
 
 		public class RecaptchaSettings
@@ -60,7 +64,16 @@ namespace WebApplication3.Pages
                 false, false);
                 if (identityResult.Succeeded)
                 {
-					return Redirect("/Display");
+                    var user = await userManager.FindByEmailAsync(LModel.Username);
+                    var userId = user.Id;
+                    var log = new AuditLog
+                    {
+                        UserId = userId,
+                        Action = "LOGIN",
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await _auditLogService.LogAsync(log);
+                    return Redirect("/");
 
                 }
                 else

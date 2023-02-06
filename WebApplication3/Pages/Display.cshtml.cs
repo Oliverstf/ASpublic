@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Cryptography;
 using System.Text;
@@ -23,6 +24,16 @@ namespace WebApplication3.Pages
 		public ApplicationUser UserDis { get; set; }
         public string imgSrc { get; set; }
         public string About { get; set; }
+
+        public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
+        {
+            if (!context.HttpContext.User.IsInRole("Administrator"))
+            {
+                context.Result = new RedirectToPageResult("/Login");
+            }
+
+            base.OnPageHandlerExecuting(context);
+        }
         public async Task<IActionResult> OnGet()
         {
 			UserDis = await userManager.GetUserAsync(User);

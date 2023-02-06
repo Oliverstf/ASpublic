@@ -14,12 +14,15 @@ namespace WebApplication3.Pages
 	{
 		private UserManager<ApplicationUser> userManager { get; }
 		private readonly HtmlEncoder htmlEncoder;
-		public IndexModel(UserManager<ApplicationUser> userManager, HtmlEncoder htmlEncoder)
-		{
-			this.userManager = userManager;
-			this.htmlEncoder = htmlEncoder;
-		}
-		[BindProperty]
+        public readonly SignInManager<ApplicationUser> signInManager;
+
+        public IndexModel(UserManager<ApplicationUser> userManager, HtmlEncoder htmlEncoder, SignInManager<ApplicationUser> signInManager)
+        {
+            this.userManager = userManager;
+            this.htmlEncoder = htmlEncoder;
+            this.signInManager = signInManager;
+        }
+        [BindProperty]
 		public ApplicationUser UserDis { get; set; }
 		public string imgSrc { get; set; }
 		public string About { get; set; }

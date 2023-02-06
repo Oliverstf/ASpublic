@@ -4,10 +4,12 @@
     ViewData["Title"] = "Home page";
 }
 
-@*<h1>Details</h1>
-@{if (User != null)}
+<h1>Details</h1>
+@{
+    if (Model.signInManager.IsSignedIn(User))
+{
 <div>
-    <h4>Product</h4>
+    <h4>Display</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -51,8 +53,13 @@
         </div>
         <div class="mb-3 text-center">
             <a asp-page="/Logout" class="btn btn-default">Logout</a>
+            <a asp-page="/Display" class="btn btn-default">Admin</a>
 
         </div>
     </dl>
 </div>
-<div>*@
+    }
+    else{
+    <h4>Product</h4>
+    }
+    }

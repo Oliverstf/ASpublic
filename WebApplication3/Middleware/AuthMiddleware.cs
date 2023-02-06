@@ -21,11 +21,11 @@ namespace WebApplication3.Middleware
                 return;
             }
 
-            //if (context.User.Identity.IsAuthenticated && ((context.Request.Path.Value == "/Login") && (context.Request.Path.Value == "/Register")))
-            //{
-            //    context.Response.Redirect("/Display");
-            //    return;
-            //}
+            if (context.User.Identity.IsAuthenticated && ((context.Request.Path.Value == "/Login") || (context.Request.Path.Value == "/Register") || (context.Request.Path.Value == "/ForgetPassword") || (context.Request.Path.Value == "/ResetPassword") || (context.Request.Path.Value == "/EmailSentConfirmed")))
+            {
+                context.Response.Redirect("/");
+                return;
+            }
 
             await _next(context);
         }

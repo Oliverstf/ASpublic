@@ -20,6 +20,7 @@ namespace WebApplication3.Pages
         private readonly HtmlEncoder htmlEncoder;
 		private readonly UserPasswordHistoryService _userpasswordhistory;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IAuditLogService _auditLogService;
 
 
 
@@ -32,7 +33,8 @@ namespace WebApplication3.Pages
         AuthDbContext authDbContext,
         HtmlEncoder htmlEncoder,
 		UserPasswordHistoryService userpasswordhistory,
-        RoleManager<IdentityRole> roleManager)
+        RoleManager<IdentityRole> roleManager,
+        IAuditLogService auditLogService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -40,6 +42,7 @@ namespace WebApplication3.Pages
             this.htmlEncoder = htmlEncoder;
             this._userpasswordhistory = userpasswordhistory;
             _roleManager = roleManager;
+            _auditLogService = auditLogService;
         }
 
 
@@ -51,12 +54,7 @@ namespace WebApplication3.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var existuser = await userManager.FindByEmailAsync(RModel.Email);
-            if (existuser != null)
-            {
-                ModelState.AddModelError("", "Email is taken");
-                return Page();
-            }
+            
 
             string[] roleNames = { "Administrator", "User" };
             foreach (var roleName in roleNames)
@@ -70,41 +68,58 @@ namespace WebApplication3.Pages
 
             if (ModelState.IsValid)
             {
+                var existuser = await userManager.FindByEmailAsync(RModel.Email);
                 //ApplicationUser user = authDbContext.AspNetUsers.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                 //ApplicationUser emil = db.UserProfiles.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
-                
-                byte[] imageData;
-                using (var stream = new MemoryStream())
+                if (existuser != null)
                 {
-                    await RModel.ImageFile.CopyToAsync(stream);
-                    imageData = stream.ToArray();
+                    ModelState.AddModelError("", "Email is taken");
+                    return Page();
                 }
-                var user = new ApplicationUser()
-                {
-                    UserName = RModel.Email,
-                    Email = RModel.Email,
-                    Credit_Card = Encrypt(RModel.CreditCard),
-                    Gender = RModel.Gender,
-                    PhoneNumber = RModel.PhoneNumber,
-                    ImageFile = imageData,
-                    About = htmlEncoder.Encode(RModel.AboutMe),
-                    Address = RModel.Address,
-                    Full_Name = RModel.Full_Name
+                else { 
+                    byte[] imageData;
+                    using (var stream = new MemoryStream())
+                    {
+                        await RModel.ImageFile.CopyToAsync(stream);
+                        imageData = stream.ToArray();
+                    }
+                    var user = new ApplicationUser()
+                    {
+                        UserName = RModel.Email,
+                        Email = RModel.Email,
+                        Credit_Card = Encrypt(RModel.CreditCard),
+                        Gender = RModel.Gender,
+                        PhoneNumber = RModel.PhoneNumber,
+                        ImageFile = imageData,
+                        About = htmlEncoder.Encode(RModel.AboutMe),
+                        Address = RModel.Address,
+                        Full_Name = RModel.Full_Name
 
-                };
-                var result = await userManager.CreateAsync(user, RModel.Password);
-                if (result.Succeeded)
-                {
-                    
-                    _userpasswordhistory.SavePassword(RModel.Email,RModel.Password,DateTime.Now);
-                    await userManager.AddToRoleAsync(user, "User");
-                    await signInManager.SignInAsync(user, false);
-                    return RedirectToPage("Index");
+                    };
+                    var result = await userManager.CreateAsync(user, RModel.Password);
+                    if (result.Succeeded)
+                    {
+                        var log = new AuditLog
+                        {
+                            UserId = user.Id,
+                            Action = "REGISTRATION",
+                            Timestamp = DateTime.UtcNow
+                        };
+                        await _auditLogService.LogAsync(log);
+
+                        _userpasswordhistory.SavePassword(RModel.Email, RModel.Password, DateTime.Now);
+                        await userManager.AddToRoleAsync(user, "User");
+                        await signInManager.SignInAsync(user, false);
+                        return RedirectToPage("Index");
+                
+               
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
                 }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
+                
                 
             }
             return Page();

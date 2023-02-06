@@ -60,6 +60,7 @@ builder.Services.AddTransient<IUserTwoFactorTokenProvider<ApplicationUser>, Data
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
 			   opt.TokenLifespan = TimeSpan.FromHours(2));
 builder.Services.AddScoped<UserPasswordHistoryService>();
+builder.Services.AddTransient<IAuditLogService, AuditLogService>();
 
 var app = builder.Build();
 
@@ -85,6 +86,9 @@ app.UseAuthorization();
 
 
 app.UseMiddleware<AuthMiddleware>();
+
+app.UseMiddleware<AuditLogMiddleware>();
+
 
 
 
