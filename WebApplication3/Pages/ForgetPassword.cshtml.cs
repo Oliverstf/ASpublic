@@ -40,7 +40,7 @@ namespace WebApplication3.Pages
                             link = string.Format(link, email_encode, token);
                             MailMessage mail = new MailMessage();
                             mail.To.Add(FPModel.Email.ToString().Trim());
-                            mail.From = new MailAddress("olivermonteiro1410@gmail.com");
+                            mail.From = new MailAddress("olivermonteiro14101@gmail.com");
                             mail.Subject = "Hello test email :)";
                             mail.Body = "<p>Reset link here:<br/>" + link + "</p>";
                             mail.IsBodyHtml = true;
@@ -49,7 +49,7 @@ namespace WebApplication3.Pages
                             smtp.EnableSsl = true;
                             smtp.UseDefaultCredentials = false;
                             smtp.Host = "smtp.gmail.com";
-                            smtp.Credentials = new System.Net.NetworkCredential("olivermonteiro1410@gmail.com", "aynghfruzjxozgho");
+                            smtp.Credentials = new System.Net.NetworkCredential("olivermonteiro14101@gmail.com", "aynghfruzjxozgho");
 
                             smtp.Send(mail);
                             return RedirectToPage("EmailSentConfirmed");
