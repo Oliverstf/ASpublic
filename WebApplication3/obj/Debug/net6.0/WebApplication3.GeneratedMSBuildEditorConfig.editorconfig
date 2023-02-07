@@ -5,65 +5,68 @@ build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
-build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WebApplication3
 build_property.RootNamespace = WebApplication3
-build_property.ProjectDir = C:\Users\oluou\source\repos\ASlogin\WebApplication3\
+build_property.ProjectDir = C:\Users\oluou\Source\Repos\ASlogin\WebApplication3\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\oluou\source\repos\ASlogin\WebApplication3
+build_property.MSBuildProjectDirectory = C:\Users\oluou\Source\Repos\ASlogin\WebApplication3
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/oluou/source/repos/ASlogin/WebApplication3/Pages/Display.cshtml]
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/Display.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGlzcGxheS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/oluou/source/repos/ASlogin/WebApplication3/Pages/EmailSentConfirmed.cshtml]
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/EmailSentConfirmed.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1haWxTZW50Q29uZmlybWVkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/oluou/source/repos/ASlogin/WebApplication3/Pages/ForgetPassword.cshtml]
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/Error/404.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3JcNDA0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/ForgetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRm9yZ2V0UGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/oluou/source/repos/ASlogin/WebApplication3/Pages/Index.cshtml]
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/oluou/source/repos/ASlogin/WebApplication3/Pages/Login.cshtml]
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/oluou/source/repos/ASlogin/WebApplication3/Pages/Logout.cshtml]
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nb3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/oluou/source/repos/ASlogin/WebApplication3/Pages/Privacy.cshtml]
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/oluou/source/repos/ASlogin/WebApplication3/Pages/Register.cshtml]
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/oluou/source/repos/ASlogin/WebApplication3/Pages/ResetPassword.cshtml]
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzZXRQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/oluou/source/repos/ASlogin/WebApplication3/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/oluou/source/repos/ASlogin/WebApplication3/Pages/_ViewImports.cshtml]
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/oluou/source/repos/ASlogin/WebApplication3/Pages/_ViewStart.cshtml]
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/oluou/source/repos/ASlogin/WebApplication3/Pages/Shared/_Layout.cshtml]
+[C:/Users/oluou/Source/Repos/ASlogin/WebApplication3/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-c24imvrpxj

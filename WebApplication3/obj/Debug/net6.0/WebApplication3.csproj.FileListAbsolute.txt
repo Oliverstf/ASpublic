@@ -248,11 +248,6 @@ C:\Users\oluou\source\repos\ASlogin\WebApplication3\obj\Debug\net6.0\WebApplicat
 C:\Users\oluou\source\repos\ASlogin\WebApplication3\obj\Debug\net6.0\WebApplication3.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\oluou\source\repos\ASlogin\WebApplication3\obj\Debug\net6.0\WebApplication3.RazorAssemblyInfo.cache
 C:\Users\oluou\source\repos\ASlogin\WebApplication3\obj\Debug\net6.0\WebApplication3.RazorAssemblyInfo.cs
-C:\Users\oluou\source\repos\ASlogin\WebApplication3\obj\Debug\net6.0\staticwebassets\msbuild.WebApplication3.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\oluou\source\repos\ASlogin\WebApplication3\obj\Debug\net6.0\staticwebassets\msbuild.build.WebApplication3.props
-C:\Users\oluou\source\repos\ASlogin\WebApplication3\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.WebApplication3.props
-C:\Users\oluou\source\repos\ASlogin\WebApplication3\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.WebApplication3.props
-C:\Users\oluou\source\repos\ASlogin\WebApplication3\obj\Debug\net6.0\staticwebassets.pack.json
 C:\Users\oluou\source\repos\ASlogin\WebApplication3\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\oluou\source\repos\ASlogin\WebApplication3\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\oluou\source\repos\ASlogin\WebApplication3\obj\Debug\net6.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css

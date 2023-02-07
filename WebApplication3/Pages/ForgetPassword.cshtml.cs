@@ -49,7 +49,8 @@ namespace WebApplication3.Pages
                             smtp.EnableSsl = true;
                             smtp.UseDefaultCredentials = false;
                             smtp.Host = "smtp.gmail.com";
-                            smtp.Credentials = new System.Net.NetworkCredential("olivermonteiro1410@gmail.com", "vxoacvnpywlabeih");
+                            smtp.Credentials = new System.Net.NetworkCredential("olivermonteiro1410@gmail.com", "aynghfruzjxozgho");
+
                             smtp.Send(mail);
                             return RedirectToPage("EmailSentConfirmed");
                         }
