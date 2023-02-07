@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wajB+vPNulTFmtUTPubokknfP//za3m+NOLwjig8+fJTLECQ6c8PtNhNeCDkaI2PYMoJRrtUkLIPlIFKYkfVkA==",
+  "dgSpecHash": "vMGlW7lqEU+KljgK/1zmTlQWhQprPKNCCur0mPKghCRO42GkezSTvVSBiFhJ7UND3wkOJPC9vKSHVNX7oF5Nfg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\oluou\\Source\\Repos\\ASlogin\\WebApplication3\\WebApplication3.csproj",
+  "projectFilePath": "C:\\Users\\oluou\\source\\repos\\ASlogin\\WebApplication3\\WebApplication3.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\oluou\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\oluou\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
